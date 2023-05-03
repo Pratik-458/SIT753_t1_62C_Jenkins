@@ -22,8 +22,7 @@ pipeline {
             }
             post{
                 always{
-                    emailext attachLog: true,
-                    to: "pratikmel162@gmail.com",
+                    mail to: "pratikmel162@gmail.com",
                     subject: "Test on lower environment email",
                     body: "testing logs attached ${currentBuild.result}: ${BUILD_URL}"
                 }
@@ -40,8 +39,7 @@ pipeline {
             }
             post{
                 always{
-                    emailext attachLog: true,
-                    to: "pratikmel162@gmail.com",
+                    mail to: "pratikmel162@gmail.com",
                     subject: "Security Scan stage email",
                     body: "Security scan logs attached ${currentBuild.result}: ${BUILD_URL}"
                 }
@@ -58,8 +56,7 @@ pipeline {
             }
             post{
                 always{
-                    emailext attachLog: true,
-                    to: "pratikmel162@gmail.com",
+                    mail to: "pratikmel162@gmail.com",
                     subject: "Test on Staging environment email",
                     body: "Staging Test logs attached ${currentBuild.result}: ${BUILD_URL}"
                 }
