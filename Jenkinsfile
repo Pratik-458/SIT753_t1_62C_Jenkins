@@ -11,42 +11,63 @@ pipeline {
             steps {
                 echo "fetch the source code from the directory path specified by the environment variable"
                 echo "compile the code and generate any necessary artifacts"
-                echo "Maven is a build automation tool used primarily for Java projects. Maven can also be used to build and manage projects written in C#, Ruby, Scala, and other languages "
+                echo "Maven is a build automation tool."
+            }
+            
+        }
+        stage("Test") {
+            steps {
+                echo "Using JUnit for unit testing..."
+                echo "Using Selenium for integration testing..."
             }
             post{
                 always{
                     emailext attachLog: true,
                     to: "pratikmel162@gmail.com",
-                    subject: "Build stage email",
-                    body: "Build log attached"
+                    subject: "Test on lower environment email",
+                    body: "testing logs attached"
                 }
             }
         }
-        stage("Test") {
+        stage("Code Analysis") {
             steps {
-                echo "Running unit tests for the application..."
-                echo "Running integration tests for the application..."
+                echo "Using SonarQube to check the quality of the code..."
             }
         }
-        stage("Code Quality Check") {
+        stage("Security Scan") {
             steps {
-                echo "check the quality of the code for the application..."
+                echo "Using OWASP ZAP to identify any vulnerabilitie..."
+            }
+            post{
+                always{
+                    emailext attachLog: true,
+                    to: "pratikmel162@gmail.com",
+                    subject: "Security Scan stage email",
+                    body: "Security scan logs attached"
+                }
             }
         }
-        stage("Deploy") {
+        stage("Deploy to staging") {
             steps {
-                echo "deploy the application to a testing environment specified by the environment variable"
+                echo "Using AWS CodeDeploy to deploy the application to a staging environment"
             }
         }
-        stage("Approval") {
+        stage("Test on staging") {
             steps {
-                echo "Approval stage..."
-                sleep(time: 10, unit: 'SECONDS')
+                echo "Using SonarQube for running integration tests on staging environment..."
+            }
+            post{
+                always{
+                    emailext attachLog: true,
+                    to: "pratikmel162@gmail.com",
+                    subject: "Test on Staging environment email",
+                    body: "Staging Test logs attached"
+                }
             }
         }
         stage("Deploy to Production") {
             steps {
-                echo "Deploying to Production environment ${PRODUCTION_ENVIRONMENT}"
+                echo "Using AWS CodeDeploy to deploy the application to a production servert ${PRODUCTION_ENVIRONMENT}"
             }
         }
         
