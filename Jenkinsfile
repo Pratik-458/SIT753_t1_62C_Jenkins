@@ -67,7 +67,7 @@ pipeline {
         }
         stage("Deploy to Production") {
             steps {
-                echo "Using AWS CodeDeploy to deploy the application to a production servert ${PRODUCTION_ENVIRONMENT}"
+                echo "Using AWS CodeDeploy to deploy the application to a production server. ${PRODUCTION_ENVIRONMENT}"
             }
         }
         
