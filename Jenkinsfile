@@ -54,7 +54,7 @@ pipeline {
         }
         stage("Test on staging") {
             steps {
-                echo "Using SonarQube for running integration tests on staging environment..."
+                echo "Using Selenium for running integration tests on staging environment..."
             }
             post{
                 always{
@@ -68,6 +68,7 @@ pipeline {
         stage("Deploy to Production") {
             steps {
                 echo "Using AWS CodeDeploy to deploy the application to a production server. ${PRODUCTION_ENVIRONMENT}"
+                echo "Completed deployment!"
             }
         }
         
